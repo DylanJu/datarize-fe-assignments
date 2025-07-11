@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 
 import { useDashBoardQuery } from './hook/useDashBoardQuery'
+import PurchaseFrequency from './components/PurchaseFrequency'
 
 const App: FC = () => {
   const [{ data: customers }, { data: purchaseFrequency }] = useDashBoardQuery({
@@ -12,7 +13,11 @@ const App: FC = () => {
   console.log(customers)
   console.log(purchaseFrequency)
 
-  return <div>hello world</div>
+  return (
+    <div>
+      <PurchaseFrequency purchaseFrequency={purchaseFrequency} />
+    </div>
+  )
 }
 
 export default App
