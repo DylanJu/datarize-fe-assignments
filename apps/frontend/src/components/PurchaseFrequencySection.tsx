@@ -6,9 +6,9 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import { usePurchaseFrequencyQuery } from '../hook/usePurchaseFrequencyQuery'
 import { formatPurchaseFrequencyLabel } from '../util/formatPurchaseFrequencyLabel'
 
-import * as styles from './PurchaseFrequency.css'
+import * as styles from './PurchaseFrequencySection.css'
 
-const PurchaseFrequency: FC = () => {
+const PurchaseFrequencySection: FC = () => {
   const { data: purchaseFrequency } = usePurchaseFrequencyQuery()
 
   const chartData = useMemo(() => {
@@ -36,4 +36,4 @@ const PurchaseFrequency: FC = () => {
   )
 }
 
-export default PurchaseFrequency
+export default PurchaseFrequencySection

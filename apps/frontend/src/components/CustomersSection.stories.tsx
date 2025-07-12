@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import Customers from './Customers'
+import CustomersSection from './CustomersSection'
 import { http, HttpResponse } from 'msw'
 
 const meta = {
-  title: 'component/Customers',
-  component: Customers,
+  title: 'component/sections/CustomersSection',
+  component: CustomersSection,
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof Customers>
+} satisfies Meta<typeof CustomersSection>
 
 export default meta
 type Story = StoryObj<typeof meta>

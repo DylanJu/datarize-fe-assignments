@@ -2,9 +2,9 @@ import type { FC } from 'react'
 
 import { useCustomersQuery } from '../hook/useCustomersQuery'
 
-import * as styles from './Customers.css'
+import * as styles from './CustomersSection.css'
 
-const Customers: FC = () => {
+const CustomersSection: FC = () => {
   const { data: customers } = useCustomersQuery()
 
   return (
@@ -37,4 +37,4 @@ const Customers: FC = () => {
   )
 }
 
-export default Customers
+export default CustomersSection
