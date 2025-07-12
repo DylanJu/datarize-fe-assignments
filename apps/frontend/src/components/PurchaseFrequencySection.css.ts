@@ -11,5 +11,20 @@ export const container = style({
 })
 
 export const header = style({
-  marginBottom: '1.5rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  marginBottom: '2rem',
+})
+
+export const dateRange = style({
+  display: 'flex',
+  gap: '1rem',
+  alignItems: 'center',
+})
+
+export const dateRangeInput = style({
+  padding: '0.5rem',
+  border: `1px solid ${vars.colors.borderColor}`,
+  borderRadius: '0.25rem',
 })

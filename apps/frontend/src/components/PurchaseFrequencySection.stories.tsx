@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { within, expect } from '@storybook/test'
+import { within, expect, userEvent } from '@storybook/test'
 
 import PurchaseFrequencySection from './PurchaseFrequencySection'
 import { http, HttpResponse } from 'msw'
+import { mockPurchaseFrequency } from '../fixture'
 
 const meta = {
   title: 'component/sections/PurchaseFrequencySection',
@@ -21,18 +22,7 @@ export const 데이터_있음: Story = {
     msw: {
       handlers: [
         http.get('http://localhost:4000/api/purchase-frequency', async () => {
-          return HttpResponse.json([
-            { range: '0 - 20000', count: 3 },
-            { range: '20001 - 30000', count: 44 },
-            { range: '30001 - 40000', count: 50 },
-            { range: '40001 - 50000', count: 10 },
-            { range: '50001 - 60000', count: 10 },
-            { range: '60001 - 70000', count: 10 },
-            { range: '70001 - 80000', count: 100 },
-            { range: '80001 - 90000', count: 0 },
-            { range: '90001 - 100000', count: 1 },
-            { range: '100001 - 110000', count: 10 },
-          ])
+          return HttpResponse.json(mockPurchaseFrequency)
         }),
       ],
     },
@@ -73,10 +63,38 @@ export const 데이터_없음: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get('http://localhost:4000/api/purchase-frequency', async () => {
+        http.get('http://localhost:4000/api/purchase-frequency', async ({ request }) => {
+          const url = new URL(request.url)
+          const from = url.searchParams.get('from')
+          const to = url.searchParams.get('to')
+
+          if (from === '2024-07-01' && to === '2024-07-30') {
+            return HttpResponse.json(mockPurchaseFrequency)
+          }
+
           return HttpResponse.json([])
         }),
       ],
     },
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement)
+
+    await step('유저는 진입시 데이터를 정상적으로 볼 수 있어요.', async () => {
+      const PurchaseFrequencySectionElement = await canvas.findByText(/~2만원/i)
+      expect(PurchaseFrequencySectionElement).toBeInTheDocument()
+    })
+
+    await step('유저는 날짜를 변경하면 빈 차트를 볼 수 있어요.', async () => {
+      const fromInput = await canvas.findByLabelText(/시작일/i)
+      await userEvent.clear(fromInput)
+      await userEvent.type(fromInput, '2024-08-01')
+
+      const toInput = await canvas.findByLabelText(/종료일/i)
+      await userEvent.clear(toInput)
+      await userEvent.type(toInput, '2024-08-31')
+
+      expect(canvas.queryByText(/~2만원/i)).not.toBeInTheDocument()
+    })
   },
 }
