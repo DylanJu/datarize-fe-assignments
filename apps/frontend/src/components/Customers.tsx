@@ -1,14 +1,12 @@
 import type { FC } from 'react'
 
-import type { CustomersResponse } from '../api/type'
+import { useCustomersQuery } from '../hook/useCustomersQuery'
 
 import * as styles from './Customers.css'
 
-export interface CustomersProps {
-  customers: CustomersResponse
-}
+const Customers: FC = () => {
+  const { data: customers } = useCustomersQuery()
 
-const Customers: FC<CustomersProps> = ({ customers }) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -25,7 +23,7 @@ const Customers: FC<CustomersProps> = ({ customers }) => {
           </tr>
         </thead>
         <tbody>
-          {customers.map((customer) => (
+          {customers?.map((customer) => (
             <tr key={customer.id}>
               <td>{customer.id}</td>
               <td>{customer.name}</td>

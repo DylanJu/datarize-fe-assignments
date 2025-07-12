@@ -1,20 +1,18 @@
 import type { FC } from 'react'
-import type { PurchaseFrequencyResponse } from '../api/type'
 
 import { useMemo } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
+import { usePurchaseFrequencyQuery } from '../hook/usePurchaseFrequencyQuery'
 import { formatPurchaseFrequencyLabel } from '../util/formatPurchaseFrequencyLabel'
 
 import * as styles from './PurchaseFrequency.css'
 
-export interface PurchaseFrequencyProps {
-  purchaseFrequency: PurchaseFrequencyResponse
-}
+const PurchaseFrequency: FC = () => {
+  const { data: purchaseFrequency } = usePurchaseFrequencyQuery()
 
-const PurchaseFrequency: FC<PurchaseFrequencyProps> = ({ purchaseFrequency }) => {
   const chartData = useMemo(() => {
-    return purchaseFrequency.map((item) => ({
+    return purchaseFrequency?.map((item) => ({
       rangeLabel: formatPurchaseFrequencyLabel(item.range),
       count: item.count,
     }))
