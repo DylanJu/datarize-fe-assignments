@@ -15,5 +15,6 @@ export const useCustomersQuery = (params?: CustomersRequest) => {
       // 정렬 키가 있을 경우 서버에서 정렬된 데이터를 받아옴
       return data
     },
+    throwOnError: true,
   })
 }

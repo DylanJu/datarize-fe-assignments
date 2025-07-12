@@ -12,5 +12,6 @@ export const usePurchaseFrequencyQuery = (params?: PurchaseFrequencyRequest) => 
         count: item.count,
       }))
     },
+    throwOnError: true,
   })
 }

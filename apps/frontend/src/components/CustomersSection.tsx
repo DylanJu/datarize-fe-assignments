@@ -9,6 +9,8 @@ import Modal from './Modal'
 import Loader from './Loader'
 
 import * as styles from './CustomersSection.css'
+import ErrorBoundary from './ErrorBoundary'
+import { QueryErrorResetBoundary } from '@tanstack/react-query'
 
 const CustomersSection: FC = () => {
   const [sortKey, setSortKey] = useState<SortKey>()
@@ -106,7 +108,15 @@ const CustomersSection: FC = () => {
       </table>
 
       <Modal isOpen={!!customerId} onClose={() => setCustomerId(null)}>
-        {customerId === null ? null : <CustomerPurchases customerName={customerName ?? ''} customerId={customerId} />}
+        {customerId === null ? null : (
+          <QueryErrorResetBoundary>
+            {({ reset }) => (
+              <ErrorBoundary onReset={() => reset()}>
+                <CustomerPurchases customerName={customerName ?? ''} customerId={customerId} />
+              </ErrorBoundary>
+            )}
+          </QueryErrorResetBoundary>
+        )}
       </Modal>
 
       {isFetching ? <Loader /> : null}

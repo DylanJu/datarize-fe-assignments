@@ -3,5 +3,8 @@ import { customerPurchasesQueryOptions } from './query-options/customerPurchases
 import type { CustomerPurchasesRequest } from '../api/type'
 
 export const useCustomerPurchasesQuery = (params: CustomerPurchasesRequest) => {
-  return useQuery(customerPurchasesQueryOptions(params))
+  return useQuery({
+    ...customerPurchasesQueryOptions(params),
+    throwOnError: true,
+  })
 }
