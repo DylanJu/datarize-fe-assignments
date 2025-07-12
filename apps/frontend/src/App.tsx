@@ -2,6 +2,10 @@ import type { FC } from 'react'
 
 import { useDashBoardQuery } from './hook/useDashBoardQuery'
 import PurchaseFrequency from './components/PurchaseFrequency'
+import Customers from './components/Customers'
+import AppTitle from './components/AppTitle'
+
+import * as styles from './App.css'
 
 const App: FC = () => {
   const [{ data: customers }, { data: purchaseFrequency }] = useDashBoardQuery({
@@ -10,13 +14,12 @@ const App: FC = () => {
     },
   })
 
-  console.log(customers)
-  console.log(purchaseFrequency)
-
   return (
-    <div>
+    <main className={styles.layout}>
+      <AppTitle />
       <PurchaseFrequency purchaseFrequency={purchaseFrequency} />
-    </div>
+      <Customers customers={customers} />
+    </main>
   )
 }
 
