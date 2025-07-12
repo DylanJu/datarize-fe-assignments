@@ -6,7 +6,7 @@ import { delay, http, HttpResponse } from 'msw'
 import { mockCustomerPurchasesShort, mockCustomers } from '../fixture'
 
 const meta = {
-  title: 'component/sections/CustomersSection',
+  title: 'components/sections/CustomersSection',
   component: CustomersSection,
   parameters: {
     layout: 'centered',

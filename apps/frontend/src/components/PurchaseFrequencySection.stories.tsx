@@ -7,7 +7,7 @@ import { http, HttpResponse, delay } from 'msw'
 import { mockPurchaseFrequency } from '../fixture'
 
 const meta = {
-  title: 'component/sections/PurchaseFrequencySection',
+  title: 'components/sections/PurchaseFrequencySection',
   component: PurchaseFrequencySection,
   parameters: {
     layout: 'fullscreen',

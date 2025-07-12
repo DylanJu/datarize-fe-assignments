@@ -6,7 +6,7 @@ import { mockCustomerPurchasesShort, mockCustomers, mockPurchaseFrequency } from
 import App from './App'
 
 const meta = {
-  title: 'components/App',
+  title: 'App',
   component: App,
   parameters: {
     layout: 'fullscreen',
