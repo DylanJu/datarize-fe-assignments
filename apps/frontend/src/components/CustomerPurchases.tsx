@@ -2,7 +2,7 @@ import type { FC } from 'react'
 
 import * as styles from './CustomerPurchases.css'
 
-import { useCustomerPurchasesQuery } from '../hook/useCustomerPurchasesQuery'
+import { useCustomerPurchasesQuery } from '../query/useCustomerPurchasesQuery'
 import Loader from './Loader'
 
 interface CustomerPurchasesProps {

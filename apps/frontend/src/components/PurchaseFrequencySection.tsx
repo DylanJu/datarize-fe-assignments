@@ -2,7 +2,7 @@ import type { FC } from 'react'
 
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
-import { usePurchaseFrequencyQuery } from '../hook/usePurchaseFrequencyQuery'
+import { usePurchaseFrequencyQuery } from '../query/usePurchaseFrequencyQuery'
 import { useDateRange } from '../hook/useDateRange'
 
 import * as styles from './PurchaseFrequencySection.css'

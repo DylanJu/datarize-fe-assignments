@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import { useState } from 'react'
 
 import type { SortKey } from '../api/type'
-import { useCustomersQuery } from '../hook/useCustomersQuery'
+import { useCustomersQuery } from '../query/useCustomersQuery'
 import { useDebouncedInputValue } from '../hook/useDebouncedInputValue'
 import CustomerPurchases from './CustomerPurchases'
 import Modal from './Modal'

@@ -2,7 +2,7 @@ import React from 'react'
 import type { Preview } from '@storybook/react-vite'
 import { initialize, mswLoader } from 'msw-storybook-addon'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from '../src/api/queryClient'
+import { queryClient } from '../src/query/queryClient'
 
 import '../src/style/global.css'
 
