@@ -7,6 +7,7 @@ export const container = style({
   rowGap: '2rem',
   margin: '1rem 1.5rem',
   padding: '2rem 1.5rem',
+  minWidth: '500px',
   border: `1px solid ${vars.colors.borderColor}`,
   borderRadius: '0.5rem',
   backgroundColor: vars.colors.background,

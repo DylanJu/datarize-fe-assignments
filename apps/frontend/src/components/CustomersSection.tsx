@@ -4,6 +4,8 @@ import { useState } from 'react'
 import type { SortKey } from '../api/type'
 import { useCustomersQuery } from '../hook/useCustomersQuery'
 import { useDebouncedInputValue } from '../hook/useDebouncedInputValue'
+import CustomerPurchases from './CustomerPurchases'
+import Modal from './Modal'
 
 import * as styles from './CustomersSection.css'
 
@@ -11,6 +13,7 @@ const CustomersSection: FC = () => {
   const [sortKey, setSortKey] = useState<SortKey>()
   const { inputValue, setInputValue, debouncedValue: searchName } = useDebouncedInputValue(350)
   const { data: customers } = useCustomersQuery({ sortBy: sortKey, name: searchName })
+  const [customerId, setCustomerId] = useState<number | null>(null)
 
   const handleSortByCount = () => {
     setSortKey(sortKey === 'asc' ? 'desc' : 'asc')
@@ -23,6 +26,12 @@ const CustomersSection: FC = () => {
   const handleSearchName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
+
+  const handleRowClick = (customerId: number) => {
+    setCustomerId(customerId)
+  }
+
+  const customerName = customers?.find((customer) => customer.id === customerId)?.name
 
   return (
     <div className={styles.container}>
@@ -75,7 +84,17 @@ const CustomersSection: FC = () => {
         </thead>
         <tbody>
           {customers?.map((customer) => (
-            <tr key={customer.id}>
+            <tr
+              key={customer.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => handleRowClick(customer.id)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleRowClick(customer.id)
+                }
+              }}
+            >
               <td>{customer.id}</td>
               <td>{customer.name}</td>
               <td>{customer.count} 회</td>
@@ -84,6 +103,10 @@ const CustomersSection: FC = () => {
           ))}
         </tbody>
       </table>
+
+      <Modal isOpen={!!customerId} onClose={() => setCustomerId(null)}>
+        {customerId === null ? null : <CustomerPurchases customerName={customerName ?? ''} customerId={customerId} />}
+      </Modal>
     </div>
   )
 }
