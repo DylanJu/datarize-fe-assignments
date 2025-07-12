@@ -3,12 +3,14 @@ import { useState } from 'react'
 
 import type { SortKey } from '../api/type'
 import { useCustomersQuery } from '../hook/useCustomersQuery'
+import { useDebouncedInputValue } from '../hook/useDebouncedInputValue'
 
 import * as styles from './CustomersSection.css'
 
 const CustomersSection: FC = () => {
   const [sortKey, setSortKey] = useState<SortKey>()
-  const { data: customers } = useCustomersQuery({ sortBy: sortKey })
+  const { inputValue, setInputValue, debouncedValue: searchName } = useDebouncedInputValue(350)
+  const { data: customers } = useCustomersQuery({ sortBy: sortKey, name: searchName })
 
   const handleSortByCount = () => {
     setSortKey(sortKey === 'asc' ? 'desc' : 'asc')
@@ -18,10 +20,24 @@ const CustomersSection: FC = () => {
     setSortKey(undefined)
   }
 
+  const handleSearchName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <h2>고객 목록</h2>
+
+        <div>
+          <input
+            type="text"
+            placeholder="이름 검색"
+            value={inputValue}
+            onChange={handleSearchName}
+            className={styles.searchInput}
+          />
+        </div>
       </div>
 
       <table className={styles.table}>

@@ -12,6 +12,17 @@ export const container = style({
 
 export const header = style({
   marginBottom: '1.5rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+})
+
+export const searchInput = style({
+  width: '100%',
+  padding: '0.5rem',
+  border: `1px solid ${vars.colors.borderColor}`,
+  borderRadius: '0.25rem',
+  boxSizing: 'border-box',
 })
 
 export const table = style({
