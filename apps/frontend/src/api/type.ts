@@ -13,9 +13,11 @@ export interface PurchaseFrequency {
 // 구매 빈도 API 응답 타입
 export type PurchaseFrequencyResponse = PurchaseFrequency[]
 
+export type SortKey = 'asc' | 'desc'
+
 // 고객 목록 API 요청 타입
 export interface CustomersRequest {
-  sortBy?: 'asc' | 'desc'
+  sortBy?: SortKey
   name?: string
 }
 

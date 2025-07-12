@@ -30,9 +30,26 @@ globalStyle(`${table} th`, {
 })
 
 globalStyle(`${table} td:nth-child(2)`, {
-  textAlign: 'left',
+  textAlign: 'center',
 })
 
-globalStyle(`${table} td:nth-child(3), ${table} td:nth-child(4)`, {
+globalStyle(`${table} td:nth-child(1), ${table} td:nth-child(3), ${table} td:nth-child(4)`, {
   textAlign: 'right',
+})
+
+globalStyle(`${table} tbody tr:hover`, {
+  cursor: 'pointer',
+  backgroundColor: '#f5f5f5',
+})
+
+export const sortableHeader = style({
+  cursor: 'pointer',
+  userSelect: 'none',
+  ':hover': {
+    backgroundColor: '#f5f5f5',
+  },
+  ':focus': {
+    outline: '2px solid #4f46e5',
+    outlineOffset: '-2px',
+  },
 })
