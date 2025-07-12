@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css'
 import { vars } from '../style/theme.css'
 
 export const container = style({
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   rowGap: '2rem',

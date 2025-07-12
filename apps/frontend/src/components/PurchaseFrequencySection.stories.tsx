@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { within, expect, userEvent } from '@storybook/test'
 
 import PurchaseFrequencySection from './PurchaseFrequencySection'
-import { http, HttpResponse } from 'msw'
+import { http, HttpResponse, delay } from 'msw'
 import { mockPurchaseFrequency } from '../fixture'
 
 const meta = {
@@ -96,5 +96,18 @@ export const 데이터_없음: Story = {
 
       expect(canvas.queryByText(/~2만원/i)).not.toBeInTheDocument()
     })
+  },
+}
+
+export const 로딩: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get('http://localhost:4000/api/purchase-frequency', async () => {
+          await delay(3000)
+          return HttpResponse.json(mockPurchaseFrequency)
+        }),
+      ],
+    },
   },
 }

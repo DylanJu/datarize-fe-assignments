@@ -6,13 +6,14 @@ import { useCustomersQuery } from '../hook/useCustomersQuery'
 import { useDebouncedInputValue } from '../hook/useDebouncedInputValue'
 import CustomerPurchases from './CustomerPurchases'
 import Modal from './Modal'
+import Loader from './Loader'
 
 import * as styles from './CustomersSection.css'
 
 const CustomersSection: FC = () => {
   const [sortKey, setSortKey] = useState<SortKey>()
   const { inputValue, setInputValue, debouncedValue: searchName } = useDebouncedInputValue(350)
-  const { data: customers } = useCustomersQuery({ sortBy: sortKey, name: searchName })
+  const { data: customers, isFetching } = useCustomersQuery({ sortBy: sortKey, name: searchName })
   const [customerId, setCustomerId] = useState<number | null>(null)
 
   const handleSortByCount = () => {
@@ -107,6 +108,8 @@ const CustomersSection: FC = () => {
       <Modal isOpen={!!customerId} onClose={() => setCustomerId(null)}>
         {customerId === null ? null : <CustomerPurchases customerName={customerName ?? ''} customerId={customerId} />}
       </Modal>
+
+      {isFetching ? <Loader /> : null}
     </div>
   )
 }

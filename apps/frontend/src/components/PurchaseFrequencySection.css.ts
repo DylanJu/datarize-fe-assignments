@@ -3,6 +3,7 @@ import { style } from '@vanilla-extract/css'
 import { vars } from '../style/theme.css'
 
 export const container = style({
+  position: 'relative',
   margin: '1rem 1.5rem',
   padding: '1rem 1.5rem',
   border: `1px solid ${vars.colors.borderColor}`,

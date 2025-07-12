@@ -3,6 +3,7 @@ import type { FC } from 'react'
 import * as styles from './CustomerPurchases.css'
 
 import { useCustomerPurchasesQuery } from '../hook/useCustomerPurchasesQuery'
+import Loader from './Loader'
 
 interface CustomerPurchasesProps {
   customerName: string
@@ -10,7 +11,7 @@ interface CustomerPurchasesProps {
 }
 
 const CustomerPurchases: FC<CustomerPurchasesProps> = ({ customerName, customerId }) => {
-  const { data: customerPurchases } = useCustomerPurchasesQuery({
+  const { data: customerPurchases, isFetching } = useCustomerPurchasesQuery({
     customerId,
   })
 
@@ -35,6 +36,8 @@ const CustomerPurchases: FC<CustomerPurchasesProps> = ({ customerName, customerI
           </div>
         ))}
       </div>
+
+      {isFetching ? <Loader /> : null}
     </div>
   )
 }

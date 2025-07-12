@@ -6,10 +6,11 @@ import { usePurchaseFrequencyQuery } from '../hook/usePurchaseFrequencyQuery'
 import { useDateRange } from '../hook/useDateRange'
 
 import * as styles from './PurchaseFrequencySection.css'
+import Loader from './Loader'
 
 const PurchaseFrequencySection: FC = () => {
   const { dateRange, setDateRange } = useDateRange()
-  const { data: purchaseFrequency } = usePurchaseFrequencyQuery(dateRange)
+  const { data: purchaseFrequency, isFetching } = usePurchaseFrequencyQuery(dateRange)
 
   return (
     <div className={styles.container}>
@@ -48,6 +49,8 @@ const PurchaseFrequencySection: FC = () => {
           <Bar dataKey="count" fill="#4f46e5" />
         </BarChart>
       </ResponsiveContainer>
+
+      {isFetching ? <Loader /> : null}
     </div>
   )
 }
